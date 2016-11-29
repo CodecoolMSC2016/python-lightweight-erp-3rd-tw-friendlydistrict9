@@ -18,7 +18,3 @@ def generate_random(table):
     # your code
 
     return generated
-
-def printing(texts):
-    write_out = sys.stdout.write
-    write_out(texts + "\n")
