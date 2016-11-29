@@ -32,6 +32,7 @@ def check_rows(table, title_list):
     if not len(title_list) == row_len:
         raise IndexError("Title list and rows' length are different")
 
+
 def get_col_lengths(tablestruct):
     cols = {}
     for row in tablestruct:
@@ -49,3 +50,14 @@ def increase_to_even(num):
     if not num % 2 == 0:
         num += 1
     return num
+
+
+def open_file(filename):
+    with open(filename, "r") as data:
+
+        database = []
+
+        for line in data:
+            database.append(lines.strip().split(";"))
+
+    return database
