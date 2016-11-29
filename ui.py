@@ -16,7 +16,23 @@ import common
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
 def print_table(table, title_list):
-    check_rows(table, title_list)
+    tablestruct = [title_list]
+    for row in table:
+        tablestruct.append(row)
+    print(tablestruct)
+    cols = common.get_col_lengths(tablestruct)
+    print(cols)
+    print("\n")
+    for i in range(len(tablestruct)):
+        row_str = ""
+        for j in range(len(tablestruct[i])):
+            word = tablestruct[i][j]
+            blank = (common.increase_to_even(cols[j])-len(str(word)))
+            row_str += "| " + " "*int(int(blank)/2) + str(word) + " "*int(int(blank)/2) + " "
+        row_str += "|"
+        print(row_str)
+
+
 
 
 
@@ -85,4 +101,4 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-    print(colored("Error: ", "red"))
+    print(colored("Error: " + str(), "red"))

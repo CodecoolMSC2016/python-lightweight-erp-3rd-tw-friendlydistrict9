@@ -31,3 +31,21 @@ def check_rows(table, title_list):
             raise IndexError("Difference in rows' length")
     if not len(title_list) == row_len:
         raise IndexError("Title list and rows' length are different")
+
+def get_col_lengths(tablestruct):
+    cols = {}
+    for row in tablestruct:
+        for i in range(len(row)):
+            try:
+                if cols[i] < len(str(row[i])):
+                    cols[i] += len(str(row[i]))
+            except KeyError:
+                cols[i] = len(str(row[i]))
+    return cols
+
+
+
+def increase_to_even(num):
+    if not num % 2 == 0:
+        num += 1
+    return num
