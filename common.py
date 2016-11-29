@@ -1,6 +1,7 @@
 # implement commonly used functions here
 
 import random
+import sys
 
 
 # generate and return a unique and random string
@@ -17,3 +18,7 @@ def generate_random(table):
     # your code
 
     return generated
+
+def printing(texts):
+    write_out = sys.stdout.write
+    write_out(texts + "\n")
