@@ -31,3 +31,13 @@ def check_rows(table, title_list):
             raise IndexError("Difference in rows' length")
     if not len(title_list) == row_len:
         raise IndexError("Title list and rows' length are different")
+
+def open_file(filename):
+    with open(filename, "r") as file_
+
+    database = []
+
+    for line in file_:
+        database.append(lines.strip().split(";"))
+    
+    return database
