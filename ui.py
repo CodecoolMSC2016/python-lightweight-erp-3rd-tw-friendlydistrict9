@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def check_rows(table, title_list):
     row_len = 0
     for row in table:
@@ -10,6 +11,10 @@ def check_rows(table, title_list):
             raise IndexError("Difference in rows' length")
     if not len(title_list) == row_len:
         raise IndexError("Title list and rows' length are different")
+=======
+
+import common
+>>>>>>> 933e08b007c415aee4cefb0e12e0e340891ecd24
 
 # This function needs to print outputs like this:
 # /-----------------------------------\
@@ -23,6 +28,7 @@ def check_rows(table, title_list):
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
 def print_table(table, title_list):
+<<<<<<< HEAD
     check_rows(table, title_list)
     
 
@@ -39,6 +45,9 @@ titles1 = ["ID", "Title", "Type"]
 
 
 print_table(table1, titles1)
+=======
+    pass
+>>>>>>> 933e08b007c415aee4cefb0e12e0e340891ecd24
 
 
 # This function needs to print result of the special functions
@@ -66,11 +75,10 @@ def print_result(result, label):
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 def print_menu(title, list_options, exit_message):
-
-    # your code
-
-    pass
-
+    common.printing((title + ":"))
+    for i in range(1, len(list_options) + 1):
+        common.printing("(" + str(i) + ") " + list_options[i - 1])
+    common.printing("(0) " + exit_message)
 
 # This function gets a list of inputs from the user by the terminal
 #
