@@ -1,4 +1,3 @@
-
 import common
 
 # This function needs to print outputs like this:
@@ -15,7 +14,18 @@ import common
 
 
 def print_table(table, title_list):
-    pass
+    check_rows(table, title_list)
+
+table1 = [
+    [0, "Counter strike", "fps"],
+    [1, "fo", "fps"],
+    [2, "anything", "console"]
+]
+
+titles1 = ["ID", "Title", "Type"]
+
+
+print_table(table1, titles1)
 
 
 # This function needs to print result of the special functions
@@ -43,10 +53,10 @@ def print_result(result, label):
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 def print_menu(title, list_options, exit_message):
-    common.printing((title + ":"))
+    print((title + ":"))
     for i in range(1, len(list_options) + 1):
-        common.printing("(" + str(i) + ") " + list_options[i - 1])
-    common.printing("(0) " + exit_message)
+        print("(" + str(i) + ") " + list_options[i - 1])
+    print("(0) " + exit_message)
 
 # This function gets a list of inputs from the user by the terminal
 #
@@ -58,13 +68,16 @@ def print_menu(title, list_options, exit_message):
 def get_inputs(list_labels, title):
     inputs = []
 
-    # your code
+    get_ = input(list_labels[0])
+    for i in get_:
+        inputs.append(i)
 
     return inputs
-
 
 # This function needs to print an error message. (example: Error: @message)
 #
 # @message: string - the error message
+
+
 def print_error_message(message):
     print("\033[91m" + "Error" + message + "\033[0m")
