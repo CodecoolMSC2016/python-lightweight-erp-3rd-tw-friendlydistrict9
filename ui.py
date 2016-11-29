@@ -1,9 +1,5 @@
 import common
 
-
-
-
-
 # This function needs to print outputs like this:
 # /-----------------------------------\
 # |   id   |      title     |  type   |
@@ -18,12 +14,6 @@ import common
 def print_table(table, title_list):
     check_rows(table, title_list)
 
-
-
-
-
-
-
 table1 = [
 [0, "Counter strike", "fps"],
 [1, "fo", "fps"],
@@ -34,8 +24,6 @@ titles1 = ["ID", "Title", "Type"]
 
 
 print_table(table1, titles1)
-
-
 
 
 # This function needs to print result of the special functions
@@ -81,7 +69,6 @@ def get_inputs(list_labels, title):
         inputs.append(i)
 
     return inputs
-
 
 # This function needs to print an error message. (example: Error: @message)
 #
