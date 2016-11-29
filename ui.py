@@ -12,10 +12,32 @@
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
 def print_table(table, title_list):
+    def check_rows(table, title_list):
+        row_len = 0
+        for row in table:
+            if row_len == 0:
+                for data in row:
+                    row_len += 1
+            elif row_len == len(row):
+                pass
+            else:
+                raise IndexError("Difference in rows' length")
+        if not len(title_list) == row_len:
+            raise IndexError("Title list and rows' length are different")
+    check_rows(table, title_list)
+    
 
-    # your code
 
-    pass
+table1 = [
+[0, "Counter strike", "fps"],
+[1, "fo", "fps"],
+[2, "anything", "console"]
+]
+
+titles1 = ["ID", "Title", "Type"]
+
+
+print_table(table1, titles1)
 
 
 # This function needs to print result of the special functions
@@ -43,10 +65,10 @@ def print_result(result, label):
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 def print_menu(title, list_options, exit_message):
-    print(title + ":")
-    for i in range(1, len(list_options) + 1):
-        print("(" + str(i) + ") " + list_options[i - 1])
-    print("(0) " + exit_message)
+
+    # your code
+
+    pass
 
 
 # This function gets a list of inputs from the user by the terminal
@@ -70,3 +92,4 @@ def print_error_message(message):
     # your code
 
     pass
+
