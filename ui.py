@@ -1,3 +1,5 @@
+import common
+
 
 def check_rows(table, title_list):
     row_len = 0
@@ -11,8 +13,6 @@ def check_rows(table, title_list):
             raise IndexError("Difference in rows' length")
     if not len(title_list) == row_len:
         raise IndexError("Title list and rows' length are different")
-
-
 
 
 # This function needs to print outputs like this:
