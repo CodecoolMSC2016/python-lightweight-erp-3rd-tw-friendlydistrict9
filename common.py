@@ -33,11 +33,11 @@ def check_rows(table, title_list):
         raise IndexError("Title list and rows' length are different")
 
 def open_file(filename):
-    with open(filename, "r") as file_
+    with open(filename, "r") as data:
 
-    database = []
+        database = []
 
-    for line in file_:
-        database.append(lines.strip().split(";"))
+        for line in data:
+            database.append(lines.strip().split(";"))
     
     return database
