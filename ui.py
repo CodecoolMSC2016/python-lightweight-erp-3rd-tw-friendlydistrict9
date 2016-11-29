@@ -12,6 +12,8 @@ import common
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
+
+
 def print_table(table, title_list):
     pass
 
@@ -51,6 +53,8 @@ def print_menu(title, list_options, exit_message):
 # @list_labels: list of strings - the labels of the inputs
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
+
+
 def get_inputs(list_labels, title):
     inputs = []
 
@@ -63,8 +67,4 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-
-    # your code
-
-    pass
-
+    print("\033[91m" + "Error" + message + "\033[0m")
