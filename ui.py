@@ -16,10 +16,10 @@ def print_table(table, title_list):
     tablestruct = [title_list]
     for row in table:
         tablestruct.append(row)
-    print(tablestruct)
+    #print(tablestruct)
     cols = common.get_col_lengths(tablestruct)
-    print(cols)
-    print("\n")
+    #print(cols)
+    #print("\n")
     for i in range(len(tablestruct)):
         for k in range(2):
             row_str = ""
@@ -49,7 +49,7 @@ table1 = [
 titles1 = ["ID", "Title", "Type"]
 
 #TRY OUT HERE:
-print_table(table1, titles1)
+#print_table(table1, titles1)
 
 
 
