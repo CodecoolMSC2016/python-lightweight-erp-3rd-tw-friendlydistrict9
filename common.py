@@ -65,6 +65,7 @@ def return_col(start, blanks_char, blanks_int, content, end):
 
 
 
+
 def open_file(filename):
     """Open the existing file which is contains the datas and
     add everything in a list. The each elements is separated
