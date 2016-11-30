@@ -36,7 +36,7 @@ def start_module():
                    "Lowest price",
                    "Sold between 2 dates"]
 
-        key = common.navigate_sub_menus(module_name, options)
+        key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
             show_table(table)

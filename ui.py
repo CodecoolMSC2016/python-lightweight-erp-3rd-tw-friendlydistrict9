@@ -84,6 +84,24 @@ def print_menu(title, list_options, exit_message):
         print("(" + str(i) + ") " + list_options[i - 1])
     print("(0) " + exit_message)
 
+def navigate_sub_menus(name, options):
+    """This will create the sub menu which is selected by
+    the user in the main menu.
+    name -- definied by module in the 'module_name'
+    options -- definied by module in the 'options'
+    inputs -- if the user input more than 1 character it will
+              only get the first character
+    get_inputs -- see description in the 'get inputs' def - David Szilagyi
+    """
+    while True:
+        print_menu(name, options, "Return to main menu")
+        try:
+            inputs = get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            return option
+        except KeyError as err:
+            print_error_message(err)
+
 # This function gets a list of inputs from the user by the terminal
 #
 # @list_labels: list of strings - the labels of the inputs

@@ -35,7 +35,7 @@ def start_module():
                    "Maximum profit",
                    "Average profit"]
 
-        key = common.navigate_sub_menus(module_name, options)
+        key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
             show_table(table)

@@ -33,7 +33,7 @@ def start_module():
                    "Longest name",
                    "Subscribed emails"]
 
-        key = common.navigate_sub_menus(module_name, options)
+        key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
             show_table(table)

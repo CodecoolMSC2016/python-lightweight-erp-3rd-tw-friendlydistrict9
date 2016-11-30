@@ -2,8 +2,6 @@
 
 import random
 import sys
-import ui
-
 
 # generate and return a unique and random string
 # other expectation:
@@ -87,21 +85,3 @@ def open_file(filename):
             database.append(lines.strip().split(";"))
 
     return database
-
-def navigate_sub_menus(name, options):
-    """This will create the sub menu which is selected by
-    the user in the main menu.
-    name -- definied by module in the 'module_name'
-    options -- definied by module in the 'options'
-    inputs -- if the user input more than 1 character it will
-              only get the first character
-    ui.get_inputs -- see description in the ui.py file - David Szilagyi
-    """
-    while True:
-        ui.print_menu(name, options, "Return to main menu")
-        try:
-            inputs = ui.get_inputs(["Please enter a number: "], "")
-            option = inputs[0]
-            return option
-        except KeyError as err:
-            ui.print_error_message(err)
