@@ -69,7 +69,6 @@ def navigate_sub_menus(name, options):
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
+            return option
         except KeyError as err:
             ui.print_error_message(err)
-    
-    return option
