@@ -1,5 +1,7 @@
 import common
 import os
+import time
+
 # This function needs to print outputs like this:
 # /-----------------------------------\
 # |   id   |      title     |  type   |
@@ -46,7 +48,7 @@ table1 = [
 titles1 = ["ID", "Title", "Type"]
 
 #TRY OUT HERE:
-#print_table(table1, titles1)
+print_table(table1, titles1)
 
 
 
@@ -128,4 +130,5 @@ def get_inputs(list_labels, title):
 
 
 def print_error_message(message):
-    print("\033[91m" + "Error" + message + "\033[0m")
+    print("\033[91m" + "Error: " + str(message) + "\033[0m")
+    time.sleep(2)
