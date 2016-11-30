@@ -18,11 +18,13 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
-
 # start this module by a module menu like the main menu
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
+
+table = data_manager.get_table_from_file("store/games.csv")
+
 def start_module():
     while True:
         module_name = "Store manager"

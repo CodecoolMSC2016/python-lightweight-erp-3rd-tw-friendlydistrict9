@@ -112,7 +112,7 @@ def navigate_sub_menus(name, options):
 
 
 def get_inputs(list_labels, title):
-    """Get an input from the user. 
+    """Get an input from the user.
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
