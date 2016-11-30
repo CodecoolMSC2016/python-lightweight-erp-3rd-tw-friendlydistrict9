@@ -19,25 +19,27 @@ def print_table(table, title_list):
     print(cols)
     print("\n")
     for i in range(len(tablestruct)):
-        row_str = ""
-        for j in range(len(tablestruct[i])):
-            word = tablestruct[i][j]
-            blank = (common.increase_to_even(cols[j])-len(str(word)))
-            row_str += "| " + " "*int(int(blank)/2) + str(word) + " "*int(int(blank)/2) + " "
-        row_str += "|"
-        print(row_str)
+        for k in range(2):
+            row_str = ""
+            for j in range(len(tablestruct[i])):
+                word = tablestruct[i][j]
+                blank = (common.increase_to_even(cols[j])-len(str(word)))
+                if k == 0:
+                    row_str += common.return_col("|-", "-", blank, len(str(word))*"-", "-")
+                elif k == 1:
+                    row_str += common.return_col("| ", " ", blank, str(word), " ")
+            row_str += "|"
+            print(row_str)
 
 
-
-
-
-def print_table(table, title_list):
-    check_rows(table, title_list)
 
 table1 = [
     [0, "Counter strike", "fps"],
     [1, "fo", "fps"],
-    [2, "anything", "console"]
+    [2, "anything", "console"],
+    [10, "GTA V", "fdf"],
+    [11, "fodsd", "fps"],
+    [12, "shit", "c"]
 ]
 
 titles1 = ["ID", "Title", "Type"]

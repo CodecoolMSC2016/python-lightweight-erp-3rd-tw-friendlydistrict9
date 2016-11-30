@@ -52,6 +52,12 @@ def increase_to_even(num):
     return num
 
 
+def return_col(start, blanks_char, blanks_int, content, end):
+    bl = str(blanks_char)*int(int(blanks_int)/2)
+    return (str(start) + bl + content + bl + str(end))
+
+
+
 def open_file(filename):
     with open(filename, "r") as data:
 
