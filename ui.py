@@ -1,5 +1,4 @@
 import common
-import os
 import time
 
 # This function needs to print outputs like this:
@@ -80,9 +79,8 @@ def print_result(result, label):
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 
 def print_menu(title, list_options, exit_message):
-    """Print the menu. Each of every menu, the console will be cleared. - David Szilagyi
+    """Print the menu. - David Szilagyi
     """
-    os.system("clear")
     print(("\n" + title + ":"))
     for i in range(1, len(list_options) + 1):
         print("(" + str(i) + ") " + list_options[i - 1])

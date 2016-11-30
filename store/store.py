@@ -39,6 +39,7 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
+            print(table)
             show_table(table)
         elif key == "2":
             add(table)
@@ -60,11 +61,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
-
-    pass
-
+    titles = ["ID", "Title", "Type", "In", "Out"]
+    ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
