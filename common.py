@@ -2,6 +2,7 @@
 
 import random
 import sys
+import ui
 
 
 # generate and return a unique and random string
@@ -67,3 +68,13 @@ def open_file(filename):
             database.append(lines.strip().split(";"))
 
     return database
+
+def navigate_sub_menus(name, options):
+    while True:
+        ui.print_menu(name, options, "Return to main menu")
+        try:
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            return option
+        except KeyError as err:
+            ui.print_error_message(err)

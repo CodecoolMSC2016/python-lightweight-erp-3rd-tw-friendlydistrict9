@@ -44,8 +44,8 @@ table1 = [
 
 titles1 = ["ID", "Title", "Type"]
 
-
-print_table(table1, titles1)
+#TRY OUT HERE:
+#print_table(table1, titles1)
 
 
 
@@ -73,8 +73,9 @@ def print_result(result, label):
 # @title: string - title of the menu
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
+
 def print_menu(title, list_options, exit_message):
-    print((title + ":"))
+    print(("\n" + title + ":"))
     for i in range(1, len(list_options) + 1):
         print("(" + str(i) + ") " + list_options[i - 1])
     print("(0) " + exit_message)

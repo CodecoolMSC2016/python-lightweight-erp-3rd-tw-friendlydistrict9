@@ -24,10 +24,34 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
+    while True:
+        module_name = "Store manager"
 
-    # you code
+        options = ["Show table",
+                   "Add",
+                   "Remove",
+                   "Update",
+                   "Counts by manufacturers",
+                   "Average by manufacturer"]
 
-    pass
+        key = common.navigate_sub_menus(module_name, options)
+
+        if key == "1":
+            show_table(table)
+        elif key == "2":
+            add(table)
+        elif key == "3":
+            remove(table, id_)
+        elif key == "4":
+            update(table, id_)
+        elif key == "5":
+            get_counts_by_manufacturers(table)
+        elif key == "6":
+            get_average_by_manufacturer(table, manufacturer)
+        elif key == "0":
+            break
+        else:
+            raise KeyError("There is no such option.")
 
 
 # print the default table of records from the file
@@ -80,7 +104,8 @@ def update(table, id_):
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
 
-    # your code
+    dic = {}
+    database = common.open_file(table)
 
     pass
 
