@@ -76,6 +76,8 @@ def print_result(result, label):
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 
 def print_menu(title, list_options, exit_message):
+    """Print the menu. Each of every menu, the console will be cleared. - David Szilagyi
+    """
     os.system("clear")
     print(("\n" + title + ":"))
     for i in range(1, len(list_options) + 1):
@@ -90,6 +92,9 @@ def print_menu(title, list_options, exit_message):
 
 
 def get_inputs(list_labels, title):
+    """Get an input from the user. 
+    Every character will be appended to a list. - David Szilagyi
+    """
     inputs = []
 
     get_ = input(list_labels[0])

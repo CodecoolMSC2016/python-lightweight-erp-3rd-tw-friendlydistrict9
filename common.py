@@ -59,7 +59,7 @@ def increase_to_even(num):
 
 
 def return_col(start, blanks_char, blanks_int, content, end):
-    """Returns a string which is a column's printed value in a table1
+    """Returns a string which is a column's printed value in a table
 
     Arguments:
     start -- starting string (like: "|-")
@@ -75,16 +75,28 @@ def return_col(start, blanks_char, blanks_int, content, end):
 
 
 def open_file(filename):
-    with open(filename, "r") as data:
+    """Open the existing file which is contains the datas and
+    add everything in a list. The each elements is separated 
+    by ';' and the elements is also by it in the list - David Szilagyi
+    """
+    with open(filename, "r") as datas:
 
         database = []
 
-        for line in data:
+        for lines in datas:
             database.append(lines.strip().split(";"))
 
     return database
 
 def navigate_sub_menus(name, options):
+    """This will create the sub menu which is selected by
+    the user in the main menu.
+    name -- definied by module in the 'module_name'
+    options -- definied by module in the 'options'
+    inputs -- if the user input more than 1 character it will
+              only get the first character
+    ui.get_inputs -- see description in the ui.py file - David Szilagyi
+    """
     while True:
         ui.print_menu(name, options, "Return to main menu")
         try:
