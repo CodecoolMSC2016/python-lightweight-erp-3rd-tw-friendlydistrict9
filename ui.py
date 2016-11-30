@@ -25,8 +25,10 @@ def print_table(table, title_list):
         for k in range(2):
             row_str = ""
             for j in range(len(tablestruct[i])):
-                word = tablestruct[i][j]
-                blank = (common.increase_to_even(cols[j])-len(str(word)))
+                word = str(tablestruct[i][j])
+                if not len(str(word)) % 2 == 0:
+                    word += " "
+                blank = cols[j]-len(str(word))
                 if k == 0:
                     row_str += common.return_col("|-", "-", blank, len(str(word))*"-", "-")
                 elif k == 1:
@@ -112,7 +114,7 @@ def navigate_sub_menus(name, options):
 
 
 def get_inputs(list_labels, title):
-    """Get an input from the user. 
+    """Get an input from the user.
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
