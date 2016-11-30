@@ -34,23 +34,7 @@ def print_table(table, title_list):
                     row_str += common.return_col("| ", " ", blank, str(word), " ")
             row_str += "|"
             print(row_str)
-
-
-
-table1 = [
-    [0, "Counter strike", "fps"],
-    [1, "fo", "fps"],
-    [2, "anything", "console"],
-    [10, "GTA V", "fdf"],
-    [11, "fodsd", "fps"],
-    [12, "shit", "c"]
-]
-
-titles1 = ["ID", "Title", "Type"]
-
-#TRY OUT HERE:
-#print_table(table1, titles1)
-
+            time.sleep(0.01)
 
 
 # This function needs to print result of the special functions
