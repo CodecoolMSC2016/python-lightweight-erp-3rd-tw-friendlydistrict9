@@ -50,7 +50,7 @@ table1 = [
 titles1 = ["ID", "Title", "Type"]
 
 #TRY OUT HERE:
-#print_table(table1, titles1)
+print_table(table1, titles1)
 
 
 
