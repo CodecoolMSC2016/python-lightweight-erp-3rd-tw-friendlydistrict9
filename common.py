@@ -69,19 +69,3 @@ def return_col(start, blanks_char, blanks_int, content, end):
     """
     bl = str(blanks_char)*int(int(blanks_int)/2)
     return (str(start) + bl + content + bl + str(end))
-
-
-
-def open_file(filename):
-    """Open the existing file which is contains the datas and
-    add everything in a list. The each elements is separated 
-    by ';' and the elements is also by it in the list - David Szilagyi
-    """
-    with open(filename, "r") as datas:
-
-        database = []
-
-        for lines in datas:
-            database.append(lines.strip().split(";"))
-
-    return database
