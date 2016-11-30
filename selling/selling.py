@@ -26,10 +26,34 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
+    while True:
+        module_name = "Selling manager"
 
-    # you code
+        options = ["Show table",
+                   "Add",
+                   "Remove",
+                   "Update",
+                   "Lowest price",
+                   "Sold between 2 dates"]
 
-    pass
+        key = common.navigate_sub_menus(module_name, options)
+
+        if key == "1":
+            show_table(table)
+        elif key == "2":
+            add(table)
+        elif key == "3":
+            remove(table, id_)
+        elif key == "4":
+            update(table, id_)
+        elif key == "5":
+            get_lowest_price_item_id(table)
+        elif key == "6":
+            get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+        elif key == "0":
+            break
+        else:
+            raise KeyError("There is no such option.")
 
 
 # print the default table of records from the file
