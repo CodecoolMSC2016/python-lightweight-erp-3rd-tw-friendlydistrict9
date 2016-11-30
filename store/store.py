@@ -18,11 +18,13 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
-
 # start this module by a module menu like the main menu
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
+
+table = data_manager.get_table_from_file("store/games.csv")
+
 def start_module():
     while True:
         module_name = "Store manager"
@@ -37,6 +39,7 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
+            print(table)
             show_table(table)
         elif key == "2":
             add(table)
@@ -58,11 +61,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
-
-    pass
-
+    titles = ["ID", "Title", "Type", "In", "Out"]
+    ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
