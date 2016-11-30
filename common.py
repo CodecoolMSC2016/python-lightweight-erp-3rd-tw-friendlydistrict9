@@ -21,6 +21,8 @@ def generate_random(table):
     return generated
 
 def check_rows(table, title_list):
+    """Checks if rows and header in a table has the same length
+    """
     row_len = 0
     for row in table:
         if row_len == 0:
@@ -35,6 +37,9 @@ def check_rows(table, title_list):
 
 
 def get_col_lengths(tablestruct):
+    """Returns a dictionary with the table column indexes which contain
+        the longest word at that index from the whole table
+    """
     cols = {}
     for row in tablestruct:
         for i in range(len(row)):
@@ -54,6 +59,16 @@ def increase_to_even(num):
 
 
 def return_col(start, blanks_char, blanks_int, content, end):
+    """Returns a string which is a column's printed value in a table1
+
+    Arguments:
+    start -- starting string (like: "|-")
+    blanks_char -- the character you fill the blank area with(it will be multiplied)
+    blanks_int -- the value of all blank area
+    content -- the string or number which is shown inside the table cell
+                or it can be e.g "-" if it's in the border
+    end -- ending string
+    """
     bl = str(blanks_char)*int(int(blanks_int)/2)
     return (str(start) + bl + content + bl + str(end))
 
