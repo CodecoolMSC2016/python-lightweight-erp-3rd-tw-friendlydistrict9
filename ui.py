@@ -1,4 +1,5 @@
 import common
+import os
 # This function needs to print outputs like this:
 # /-----------------------------------\
 # |   id   |      title     |  type   |
@@ -75,6 +76,7 @@ def print_result(result, label):
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 
 def print_menu(title, list_options, exit_message):
+    os.system("clear")
     print(("\n" + title + ":"))
     for i in range(1, len(list_options) + 1):
         print("(" + str(i) + ") " + list_options[i - 1])
