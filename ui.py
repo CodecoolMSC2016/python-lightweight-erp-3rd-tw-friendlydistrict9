@@ -25,8 +25,10 @@ def print_table(table, title_list):
         for k in range(2):
             row_str = ""
             for j in range(len(tablestruct[i])):
-                word = tablestruct[i][j]
-                blank = (common.increase_to_even(cols[j])-len(str(word)))
+                word = str(tablestruct[i][j])
+                if not len(str(word)) % 2 == 0:
+                    word += " "
+                blank = cols[j]-len(str(word))
                 if k == 0:
                     row_str += common.return_col("|-", "-", blank, len(str(word))*"-", "-")
                 elif k == 1:
