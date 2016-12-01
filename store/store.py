@@ -25,6 +25,7 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 
+file = "store/games.csv"
 csv_file = data_manager.get_table_from_file("store/games.csv")
 names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in stock": 4}
 
@@ -51,7 +52,8 @@ def start_module():
                 ["Please enter the id what you want to remove: "], "Remove")
             remove(csv_file, remove_id[0])
         elif key == "4":
-            update(csv_file, id_)
+            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            update(csv_file, update_id[0])
         elif key == "5":
             get_counts_by_manufacturers(csv_file)
         elif key == "6":
@@ -69,10 +71,10 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     titles = []
-
-    for title in names:
-        titles.append(title)
-
+    for count in range(len(names)):
+        for title in names:
+            if names[title] == count:
+                titles.append(title)
     ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -93,6 +95,7 @@ def add(table):
 
     table.append(new_game)
 
+    data_manager.write_table_to_file(file, table)
     return table
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -106,11 +109,12 @@ def remove(table, id_):
 
     new_list = []
 
-    for lines in range(len(table)):
-        if table[lines][names["id"]] != id_:
-            new_list.append(table[lines])
+    for line in range(len(table)):
+        if table[line][names["id"]] != id_:
+            new_list.append(table[line])
     csv_file = new_list
 
+    data_manager.write_table_to_file(file, csv_file)
     return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -121,11 +125,20 @@ def remove(table, id_):
 
 
 def update(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
-
+    for line in range(len(table)):
+        if table[line][names["id"]] != id_:
+            new_list.append(table[line])
+        elif table[line][names["id"]] == id_:
+            update_data = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "In stock: "], "Update data")
+            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3]]
+            new_list.append(modified)
+    csv_file = new_list
+    data_manager.write_table_to_file(file, csv_file)
+    return csv_file
 
 # special functions:
 # ------------------
