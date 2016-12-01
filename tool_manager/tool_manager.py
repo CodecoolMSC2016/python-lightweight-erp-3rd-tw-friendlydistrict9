@@ -28,6 +28,7 @@ file = "tool_manager/tools.csv"
 csv_file = data_manager.get_table_from_file("tool_manager/tools.csv")
 names = {"id": 0, "name": 1, "manufacturers": 2, "purchase_date": 3, "durability": 4}
 
+
 def start_module():
     while True:
         module_name = "Tool manager"
@@ -64,6 +65,8 @@ def start_module():
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table):
     titles = []
     for count in range(len(names)):
@@ -75,18 +78,17 @@ def show_table(table):
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
+
+
 def add(table):
-    
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
-    
+
     new_id = common.generate_random(ids)
     new_data = ui.get_inputs(["Title: ", "Manufacturer: ", "Bought date: ", "Durability: "], "Add new data")
     new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3]]
-
     table.append(new_game)
-
     data_manager.write_table_to_file(file, table)
     return table
 
@@ -94,6 +96,8 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
+
 def remove(table, id_):
     global csv_file
 
@@ -112,6 +116,8 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
+
 def update(table, id_):
     global csv_file
 
@@ -135,24 +141,29 @@ def update(table, id_):
 # return type: list of lists (the inner list contains the whole row with their actual data types)
 #
 # @table: list of lists
+
+
 def get_available_tools(table):
     final_list = []
     curr_year = 2016
 
     for line in range(len(table)):
         if curr_year - int(table[line][names["purchase_date"]]) < int(table[line][names["durability"]]):
-            tool = [table[line][names["id"]], table[line][names["name"]], 
-                    table[line][names["manufacturers"]], int(table[line][names["purchase_date"]]), int(table[line][names["durability"]])]
+            tool = [table[line][names["id"]], table[line][names["name"]],
+                    table[line][names["manufacturers"]], int(table[line][names["purchase_date"]]),
+                    int(table[line][names["durability"]])]
             final_list.append(tool)
-    
+
     final = ui.print_result(final_list, "Items what are not exceeded their durability yet: ")
-    
+
     return final_list
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
+
+
 def get_average_durability_by_manufacturers(table):
     avg_durability = {}
     for data in table:
