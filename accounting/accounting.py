@@ -58,7 +58,7 @@ def start_module():
                     check_id = common.id_search(remove_id[0], csv_file, names)
                     if remove_id != None:
                         remove(csv_file, remove_id[0])
-            except ValueError as err:
+            except line_amountError as err:
                 ui.print_error_message(err)
         elif key == "4":
             try:
@@ -69,11 +69,13 @@ def start_module():
                     check_id = common.id_search(update_id[0], csv_file, names)
                     if update_id != None:
                         update(csv_file, update_id[0])
-            except ValueError as err:
+            except line_amountError as err:
                 ui.print_error_message(err)
         elif key == "5":
             which_year_max(csv_file)
         elif key == "6":
+            year = ui.get_inputs(
+                ["Enter a year:"], "Input year")
             avg_amount(csv_file, year)
         elif key == "0":
             break
@@ -210,14 +212,26 @@ def which_year_max(table):
             max_profit = profit
             max_year = year
 
-    ui.print_result(str(max_year), "This year has the highest profit")
+    ui.print_result(str(max_year), "This year has the highest profit:")
     return int(max_year)
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
-
-    # your code
-
-    pass
+    profit = 0
+    item_counter = 0
+    given_year = int(year[0])
+    for line in table:
+        line_type = line[names["type"]]
+        line_amount = int(line[names["amount"]])
+        line_year = int(line[names["year"]])
+        if line_year == given_year:
+            if line_type == "out":
+                profit -= line_amount
+            else:
+                profit += line_amount
+            item_counter += 1
+    average = profit / item_counter
+    ui.print_result(average, "The average profit:")
+    return average
