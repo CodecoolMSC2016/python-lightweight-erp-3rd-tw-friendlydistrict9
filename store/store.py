@@ -24,6 +24,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("store/games.csv")
+names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in_stock": 4}
 
 def start_module():
     while True:
@@ -103,8 +104,6 @@ def update(table, id_):
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
 
-    dic = {}
-    database = common.open_file(table)
 
     pass
 

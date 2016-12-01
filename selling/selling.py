@@ -25,6 +25,10 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
+
+table = data_manager.get_table_from_file("selling/selling.csv")
+names = {"id": 0, "title": 1, "price": 2, "month": 3, "day": 4, "year": 5}
+
 def start_module():
     while True:
         module_name = "Selling manager"
