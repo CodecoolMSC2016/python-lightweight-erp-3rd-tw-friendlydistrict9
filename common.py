@@ -2,8 +2,8 @@
 
 import random
 import sys
-import random
 import string
+import time
 
 # generate and return a unique and random string
 # other expectation:
@@ -12,6 +12,8 @@ import string
 #
 # @table: list of list
 # @generated: string - generated random string (unique in the @table)
+
+
 def generate_random(table):
     """Create a unique id from a list
     """
@@ -25,8 +27,9 @@ def generate_random(table):
         for items in range(len(contain)):
             generated += contain[items][random.randint(0, len(contain[items])-1)]
         generated += "#&"
-        if not generated in table:
+        if generated not in table:
             return generated
+
 
 def check_rows(table, title_list):
     """Checks if rows and header in a table has the same length
@@ -72,3 +75,14 @@ def return_col(start, blanks_char, blanks_int, content, end):
     """
     bl = str(blanks_char)*int(int(blanks_int)/2)
     return (str(start) + bl + content + bl + str(end))
+
+
+def id_search(check_id, table, dictionary):
+    ids = []
+    for datas in table:
+        ids.append(datas[dictionary["id"]])
+
+    if check_id in ids:
+        return True
+    else:
+        raise ValueError("There is no id like '" + check_id + "' :(")

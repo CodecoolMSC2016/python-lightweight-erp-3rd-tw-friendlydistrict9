@@ -48,11 +48,22 @@ def start_module():
         elif key == "2":
             add(csv_file)
         elif key == "3":
-            remove_id = ui.get_inputs(
-                ["Please enter the id what you want to remove: "], "Remove")
+            try:
+                check_id = False
+                while check_id != True:
+                    remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+                    check_id = common.id_search(remove_id[0], csv_file, names)
+            except ValueError as err:
+                ui.print_error_message(err)
             remove(csv_file, remove_id[0])
         elif key == "4":
-            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            try:
+                check_id = False
+                while check_id != True:
+                    update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+                    check_id = common.id_search(update_id[0], csv_file, names)
+            except ValueError as err:
+                ui.print_error_message(err)
             update(csv_file, update_id[0])
         elif key == "5":
             get_counts_by_manufacturers(csv_file)

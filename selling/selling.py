@@ -51,10 +51,22 @@ def start_module():
         elif key == "2":
             add(csv_file)
         elif key == "3":
-            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            try:
+                check_id = False
+                while check_id != True:
+                    remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+                    check_id = common.id_search(remove_id[0], csv_file, names)
+            except ValueError as err:
+                ui.print_error_message(err)
             remove(csv_file, remove_id[0])
         elif key == "4":
-            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            try:
+                check_id = False
+                while check_id != True:
+                    update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+                    check_id = common.id_search(update_id[0], csv_file, names)
+            except ValueError as err:
+                ui.print_error_message(err)
             update(csv_file, update_id[0])
         elif key == "5":
             get_lowest_price_item_id(csv_file)
@@ -159,36 +171,35 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first of
 # descending alphabetical order
 def get_lowest_price_item_id(table):
-    table = sorted(table, key=lambda x: x[
-        names["title"]], reverse=True)
-    table = sorted(table, key=lambda x: int(
-<<<<<<< HEAD
-        x[names["price"]]), reverse=False)
-    # Test:
-    # print(table)
-    # print(table[0][names["ID"]])
-    return table[0][names["id"]]
-=======
-        x[names["price"]]), reverse=False)
-    # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
-    print(table[0][names["id"]])
-    return table[0][names["id"]]
->>>>>>> 4050ebaa87264aa5200b2fb287e02109127c2c3e
+    #table = sorted(table, key=lambda x: x[
+    #    names["title"]], reverse=True)
+    #table = sorted(table, key=lambda x: int(
+    #    x[names["price"]]), reverse=False)
+    ## Test:
+    ## print(table)
+    ## print(table[0][names["ID"]])
+    #return table[0][names["id"]]
+    #x[names["price"]]), reverse=False)
+    ## common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+    #print(table[0][names["id"]])
+    #return table[0][names["id"]]
+    pass
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
-    filtered_list = []
-    date_from = year_from + month_from.zfill(2) + day_from.zfill(2)
-    date_to = year_to + month_to.zfill(2) + day_to.zfill(2)
-    print(date_from, date_to)
-    for i in range(len(table)):
-        if int(date_from) < int(table[i][names["year"]] + table[i][names["month"]].zfill(2) + table[i][names["day"]].zfill(2)) < int(date_to):
-            filtered_list.append(table[i])
-    if len(filtered_list) > 0:
-        show_table(filtered_list)
-    else:
-        # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
-        print("Item are not sold between the given dates.")
-    return filtered_list
+    #filtered_list = []
+    #date_from = year_from + month_from.zfill(2) + day_from.zfill(2)
+    #date_to = year_to + month_to.zfill(2) + day_to.zfill(2)
+    #print(date_from, date_to)
+    #for i in range(len(table)):
+    #    if int(date_from) < int(table[i][names["year"]] + table[i][names["month"]].zfill(2) + table[i][names["day"]].zfill(2)) < int(date_to):
+    #        filtered_list.append(table[i])
+    #if len(filtered_list) > 0:
+    #    show_table(filtered_list)
+    #else:
+    #    # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+    #    print("Item are not sold between the given dates.")
+    #return filtered_list
+    pass
