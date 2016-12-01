@@ -26,7 +26,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("accounting/accounting.csv")
-names = {id: 0, month: 1, day: 2, year: 3, type: 4, amount: 5}
+names = {"id": 0, "month": 1, "day": 2, "year": 3, "type": 4, "amount": 5}
 
 def start_module():
     while True:

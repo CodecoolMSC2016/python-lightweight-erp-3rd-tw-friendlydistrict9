@@ -24,7 +24,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("crm/customers.csv")
-names = {id: 0, name: 1, email: 2, subscribed: 3}
+names = {"id": 0, "name": 1, "email": 2, "subscribed": 3}
 
 def start_module():
     while True:

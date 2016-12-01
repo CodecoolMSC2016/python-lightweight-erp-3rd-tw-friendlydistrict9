@@ -23,7 +23,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("hr/persons.csv")
-names = {id: 0, name: 1, birth_date: 2}
+names = {"id": 0, "name": 1, "birth_date": 2}
 
 def start_module():
     while True:
