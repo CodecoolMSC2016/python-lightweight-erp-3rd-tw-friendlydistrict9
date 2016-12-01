@@ -16,9 +16,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 
 # start this module by a module menu like the main menu
@@ -27,7 +29,8 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("selling/sellings.csv")
-names = {"id": 0, "title": 1, "price": 2, "month": 3, "day": 4, "year": 5}
+names = {"ID": 0, "Title": 1, "Price": 2, "Month": 3, "Day": 4, "Year": 5}
+
 
 def start_module():
     while True:
@@ -53,7 +56,16 @@ def start_module():
         elif key == "5":
             get_lowest_price_item_id(table)
         elif key == "6":
-            get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+            ui.get_inputs()
+            dates =
+            month_from = dates[0]
+            day_from = dates[1]
+            year_from = dates[2]
+            month_to = dates[3]
+            day_to = dates[4]
+            year_to = dates[5]
+            get_items_sold_between(
+                table, month_from, day_from, year_from, month_to, day_to, year_to)
         elif key == "0":
             break
         else:
@@ -64,15 +76,16 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
-
-    pass
-
+    titles = []
+    for title in names:
+        titles.append(title)
+    ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
+
+
 def add(table):
     
     ids = []
@@ -120,18 +133,32 @@ def update(table, id_):
 
 # the question: What is the id of the item that sold for the lowest price ?
 # return type: string (id)
-# if there are more than one with the lowest price, return the first of descending alphabetical order
+# if there are more than one with the lowest price, return the first of
+# descending alphabetical order
 def get_lowest_price_item_id(table):
-
-    # your code
-
-    pass
+    table = sorted(table, key=lambda x: x[
+        names["Title"]], reverse=True)
+    table = sorted(table, key=lambda x: int(
+        x[names["Price"]]), reverse=False)
+    # Test:
+    # print(table)
+    # print(table[0][names["ID"]])
+    return table[0][names["ID"]]
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+    # Test:
+    print(table)
 
-    # your code
+    filtered_list = []
+    date_from = year_from + month_from.zfill(2) + day_from.zfill(2)
+    date_to = year_to + month_to.zfill(2) + day_to.zfill(2)
+    print(date_from, date_to)
+    for i in range(len(table)):
+        if int(date_from) < int(table[i][names["Year"]] + table[i][names["Month"]].zfill(2) + table[i][names["Day"]].zfill(2)) < int(date_to):
+            filtered_list.append(table[i])
 
-    pass
+    print(filtered_list)
+    return filtered_list
