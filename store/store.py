@@ -73,7 +73,19 @@ def show_table(table):
 # @table: list of lists
 def add(table):
 
-    # your code
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    
+    new_id = common.generate_random(ids)
+    title = ui.get_inputs(["Please enter the title of the game: "], "Title")
+    man = ui.get_inputs(["Please enter the manufacturer of the game: "], "Manufacturer")
+    price = ui.get_inputs(["Please enter the price of the game: "], "Price")
+    in_stock = ui.get_inputs(["Please enter how many of the game is in stock: "], "In Stock")
+
+    new_game = [new_id, title[0], man[0], price[0], in_stock[0]]
+
+    table.append(new_game)
 
     return table
 

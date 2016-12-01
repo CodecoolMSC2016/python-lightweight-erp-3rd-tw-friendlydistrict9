@@ -62,18 +62,37 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
+    titles = []
 
-    # your code
+    for title in names:
+        titles.append(title)
 
-    pass
+    ui.print_table(table, titles)
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
+    
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    new_id = common.generate_random(ids)
+    month = ui.get_inputs(["Please enter the month: "], "Month")
+    day = ui.get_inputs(["Please enter the day: "], "Day")
+    year = ui.get_inputs(["Please enter the year: "], "Year")
+    while True:
+        in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+        if in_or_out[0].lower() == "in":
+            in_or_out = "in"
+        elif in_or_out[0].lower() == "out":
+            in_or_out = "out"
+    amount = ui.get_inputs(["Please enter the amount: "], "Amount")
 
-    # your code
+    new_game = [new_id, month[0], day[0], year[0], in_or_out, amount[0]]
+
+    table.append(new_game)
 
     return table
 

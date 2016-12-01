@@ -67,15 +67,32 @@ def show_table(table):
 
     ui.print_table(table, titles)
 
+
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
+    
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    
+    new_id = common.generate_random(ids)
+    name = ui.get_inputs(["Please enter the person's name: "], "Name")
+    email = ui.get_inputs(["Please enter the email: "], "Email")
+    
+    while True:
+        subscriped = ui.get_inputs(["Is this person subscriped? Y/n"], "Subscriped")
+        if subscriped[0].lower() == "y":
+            subscriped = "1"
+        elif subscriped[0].lower() == "n":
+            subscriped = "0"
 
-    # your code
+    new_game = [new_id, name[0], email[0], subscriped]
+
+    table.append(new_game)
 
     return table
-
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
