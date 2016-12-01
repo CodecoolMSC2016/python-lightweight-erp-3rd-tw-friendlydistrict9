@@ -102,15 +102,15 @@ def get_inputs(list_labels, title):
     try:
         for label in range(len(list_labels)):
             user_input = input(list_labels[label])
-            need_to_be_number = ["year", "month", "day", "number"]
+            need_to_be_number = ["year", "month", "day", "number", "price", "stock", "amount"]
             check_char = False
-            while check_char != True:
-                    for need in range(len(need_to_be_number)):
-                        if need_to_be_number[need] in list_labels[label].lower():
-                            check_char = common.char_check(user_input, string.digits, list_labels[label])
-                        else:
-                            check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase, 
-                                                           list_labels[label])
+            while check_char == False:
+                for need in range(len(need_to_be_number)):
+                    if need_to_be_number[need] in list_labels[label].lower():
+                        check_char = common.char_check(user_input, string.digits, list_labels[label])
+                    elif need == len(need_to_be_number)-1:
+                        check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase, 
+                                                            list_labels[label])
         inputs.append(user_input)
     except ValueError as err:
         print_error_message(err)

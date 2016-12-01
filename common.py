@@ -105,5 +105,14 @@ def char_check(char, check, title):
     elif "number" in title.lower():
         if char == int(char):
             return True
+    elif "price" in title.lower():
+        if char == int(char):
+            return True
+    elif "stock" in title.lower():
+        if char == int(char):
+            return True
+    elif "amount" in title.lower():
+        if char == int(char):
+            return True
     else:
         raise ValueError("Please enter only the correct form :(")
