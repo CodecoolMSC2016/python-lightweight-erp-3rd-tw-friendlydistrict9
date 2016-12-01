@@ -16,10 +16,7 @@ def print_table(table, title_list):
     tablestruct = [title_list]
     for row in table:
         tablestruct.append(row)
-    #print(tablestruct)
     cols = common.get_col_lengths(tablestruct)
-    #print(cols)
-    #print("\n")
     for i in range(len(tablestruct)):
         for k in range(2):
             row_str = ""
@@ -43,9 +40,7 @@ def print_table(table, title_list):
 # @label: string - label of the result
 def print_result(result, label):
 
-    # your code
-
-    pass
+    print("\033[92m", label, result, "\033[0m")
 
 
 # This function needs to generate outputs like this:
