@@ -23,6 +23,10 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # user need to go back to the main menu from here
 # we need to reach the default and the special functions of this module from the module menu
 #
+
+table = data_manager.get_table_from_file("tool_manager/tools.csv")
+names = {id: 0, name: 1, manufacturer: 2, purchase_date: 3, durability: 4}
+
 def start_module():
     while True:
         module_name = "Tool manager"
