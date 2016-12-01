@@ -12,14 +12,16 @@ import time
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
+
+
 def print_table(table, title_list):
     tablestruct = [title_list]
     for row in table:
         tablestruct.append(row)
-    #print(tablestruct)
+    # print(tablestruct)
     cols = common.get_col_lengths(tablestruct)
-    #print(cols)
-    #print("\n")
+    # print(cols)
+    # print("\n")
     for i in range(len(tablestruct)):
         for k in range(2):
             row_str = ""
@@ -27,11 +29,13 @@ def print_table(table, title_list):
                 word = str(tablestruct[i][j])
                 if not len(str(word)) % 2 == 0:
                     word += " "
-                blank = cols[j]-len(str(word))
+                blank = cols[j] - len(str(word))
                 if k == 0:
-                    row_str += common.return_col("|-", "-", blank, len(str(word))*"-", "-")
+                    row_str += common.return_col("|-", "-",
+                                                 blank, len(str(word)) * "-", "-")
                 elif k == 1:
-                    row_str += common.return_col("| ", " ", blank, str(word), " ")
+                    row_str += common.return_col("| ",
+                                                 " ", blank, str(word), " ")
             row_str += "|"
             print(row_str)
             time.sleep(0.01)
@@ -70,6 +74,7 @@ def print_menu(title, list_options, exit_message):
         print("(" + str(i) + ") " + list_options[i - 1])
     print("(0) " + exit_message)
 
+
 def navigate_sub_menus(name, options):
     """This will create the sub menu which is selected by
     the user in the main menu.
@@ -100,11 +105,9 @@ def get_inputs(list_labels, title):
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
-
-    user_input = input(list_labels[0])
-    #for i in user_input:
-    inputs.append(user_input)
-
+    for labels in range(len(list_labels)):
+        user_input = input(list_labels[labels])
+        inputs.append(user_input)
     return inputs
 
 
