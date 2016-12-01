@@ -82,12 +82,16 @@ def add(table):
     month = ui.get_inputs(["Please enter the month: "], "Month")
     day = ui.get_inputs(["Please enter the day: "], "Day")
     year = ui.get_inputs(["Please enter the year: "], "Year")
+    in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
     while True:
-        in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
         if in_or_out[0].lower() == "in":
             in_or_out = "in"
+            break
         elif in_or_out[0].lower() == "out":
             in_or_out = "out"
+            break
+        elif in_or_out[0].lower != "in" or "out":
+            in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
     amount = ui.get_inputs(["Please enter the amount: "], "Amount")
 
     new_game = [new_id, month[0], day[0], year[0], in_or_out, amount[0]]

@@ -80,13 +80,16 @@ def add(table):
     new_id = common.generate_random(ids)
     name = ui.get_inputs(["Please enter the person's name: "], "Name")
     email = ui.get_inputs(["Please enter the email: "], "Email")
-    
+    subscriped = ui.get_inputs(["Is this person subscriped? Y/N: "], "Subscriped")
     while True:
-        subscriped = ui.get_inputs(["Is this person subscriped? Y/n"], "Subscriped")
         if subscriped[0].lower() == "y":
             subscriped = "1"
+            break
         elif subscriped[0].lower() == "n":
             subscriped = "0"
+            break
+        elif subscriped[0].lower != "y" or "n":
+            subscriped = ui.get_inputs(["Is this person subscriped? Y/N: "], "Subscriped")
 
     new_game = [new_id, name[0], email[0], subscriped]
 
