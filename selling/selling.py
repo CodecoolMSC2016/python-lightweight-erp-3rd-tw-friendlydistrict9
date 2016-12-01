@@ -59,12 +59,9 @@ def start_module():
         elif key == "5":
             get_lowest_price_item_id(csv_file)
         elif key == "6":
-<<<<<<< HEAD
             ui.get_inputs()
-=======
             dates = ui.get_inputs(
                 ["month_from:", "day_from:", "year_from:", "month_to:", "day_to:", "year_to:"], "")
->>>>>>> 4050ebaa87264aa5200b2fb287e02109127c2c3e
             month_from = dates[0]
             day_from = dates[1]
             year_from = dates[2]
@@ -172,10 +169,10 @@ def get_lowest_price_item_id(table):
     # print(table[0][names["ID"]])
     return table[0][names["id"]]
 =======
-        x[names["Price"]]), reverse=False)
+        x[names["price"]]), reverse=False)
     # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
-    print(table[0][names["ID"]])
-    return table[0][names["ID"]]
+    print(table[0][names["id"]])
+    return table[0][names["id"]]
 >>>>>>> 4050ebaa87264aa5200b2fb287e02109127c2c3e
 
 
