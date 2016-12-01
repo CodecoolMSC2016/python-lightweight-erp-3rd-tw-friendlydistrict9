@@ -28,8 +28,9 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 
-table = data_manager.get_table_from_file("selling/sellings.csv")
-names = {"ID": 0, "Title": 1, "Price": 2, "Month": 3, "Day": 4, "Year": 5}
+file = "selling/sellings.csv"
+csv_file = data_manager.get_table_from_file("selling/sellings.csv")
+names = {"id": 0, "title": 1, "price": 2, "month": 3, "day": 4, "year": 5}
 
 
 def start_module():
@@ -46,18 +47,19 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
-            show_table(table)
+            show_table(csv_file)
         elif key == "2":
-            add(table)
+            add(csv_file)
         elif key == "3":
-            remove(table, id_)
+            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            remove(csv_file, remove_id[0])
         elif key == "4":
-            update(table, id_)
+            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            update(csv_file, update_id[0])
         elif key == "5":
-            get_lowest_price_item_id(table)
+            get_lowest_price_item_id(csv_file)
         elif key == "6":
             ui.get_inputs()
-            dates =
             month_from = dates[0]
             day_from = dates[1]
             year_from = dates[2]
@@ -77,8 +79,10 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     titles = []
-    for title in names:
-        titles.append(title)
+    for count in range(len(names)):
+        for title in names:
+            if names[title] == count:
+                titles.append(title)
     ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -98,6 +102,7 @@ def add(table):
 
     table.append(new_game)
 
+    data_manager.write_table_to_file(file, table)
     return table
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -114,6 +119,7 @@ def remove(table, id_):
             new_list.append(table[lines])
     csv_file = new_list
 
+    data_manager.write_table_to_file(file, csv_file)
     return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -122,11 +128,20 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
-
+    for line in range(len(table)):
+        if table[line][names["id"]] != id_:
+            new_list.append(table[line])
+        elif table[line][names["id"]] == id_:
+            update_data = ui.get_inputs(["Title: ", "Price: ", "Month: ", "Day: ", "Year: "], "Update data")
+            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3], update_data[4]]
+            new_list.append(modified)
+    csv_file = new_list
+    data_manager.write_table_to_file(file, csv_file)
+    return csv_file
 
 # special functions:
 # ------------------
@@ -137,13 +152,13 @@ def update(table, id_):
 # descending alphabetical order
 def get_lowest_price_item_id(table):
     table = sorted(table, key=lambda x: x[
-        names["Title"]], reverse=True)
+        names["title"]], reverse=True)
     table = sorted(table, key=lambda x: int(
-        x[names["Price"]]), reverse=False)
+        x[names["price"]]), reverse=False)
     # Test:
     # print(table)
     # print(table[0][names["ID"]])
-    return table[0][names["ID"]]
+    return table[0][names["id"]]
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
@@ -157,7 +172,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     date_to = year_to + month_to.zfill(2) + day_to.zfill(2)
     print(date_from, date_to)
     for i in range(len(table)):
-        if int(date_from) < int(table[i][names["Year"]] + table[i][names["Month"]].zfill(2) + table[i][names["Day"]].zfill(2)) < int(date_to):
+        if int(date_from) < int(table[i][names["year"]] + table[i][names["month"]].zfill(2) + table[i][names["day"]].zfill(2)) < int(date_to):
             filtered_list.append(table[i])
 
     print(filtered_list)

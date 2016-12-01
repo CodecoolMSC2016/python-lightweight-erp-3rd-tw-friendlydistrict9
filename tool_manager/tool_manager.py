@@ -24,7 +24,8 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 
-table = data_manager.get_table_from_file("tool_manager/tools.csv")
+file = "tool_manager/tools.csv"
+csv_file = data_manager.get_table_from_file("tool_manager/tools.csv")
 names = {"id": 0, "name": 1, "manufacturer": 2, "purchase_date": 3, "durability": 4}
 
 def start_module():
@@ -41,17 +42,19 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
-            show_table(table)
+            show_table(csv_file)
         elif key == "2":
-            add(table)
+            add(csv_file)
         elif key == "3":
-            remove(table, id_)
+            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            remove(csv_file, remove_id[0])
         elif key == "4":
-            update(table, id_)
+            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            update(csv_file, update_id[0])
         elif key == "5":
-            get_available_tools(table)
+            get_available_tools(csv_file)
         elif key == "6":
-            get_average_durability_by_manufacturers(table)
+            get_average_durability_by_manufacturers(csv_file)
         elif key == "0":
             break
         else:
@@ -63,10 +66,10 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     titles = []
-
-    for title in names:
-        titles.append(title)
-
+    for count in range(len(names)):
+        for title in names:
+            if names[title] == count:
+                titles.append(title)
     ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -84,6 +87,7 @@ def add(table):
 
     table.append(new_game)
 
+    data_manager.write_table_to_file(file, table)
     return table
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -100,6 +104,7 @@ def remove(table, id_):
             new_list.append(table[lines])
     csv_file = new_list
 
+    data_manager.write_table_to_file(file, csv_file)
     return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -108,11 +113,20 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
-
+    for line in range(len(table)):
+        if table[line][names["id"]] != id_:
+            new_list.append(table[line])
+        elif table[line][names["id"]] == id_:
+            update_data = ui.get_inputs(["Title: ", "Manufacturer: ", "Bought date: ", "Durability: "], "Update data")
+            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3]]
+            new_list.append(modified)
+    csv_file = new_list
+    data_manager.write_table_to_file(file, csv_file)
+    return csv_file
 
 # special functions:
 # ------------------

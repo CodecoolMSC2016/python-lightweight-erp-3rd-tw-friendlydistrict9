@@ -25,7 +25,8 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 
-table = data_manager.get_table_from_file("accounting/items.csv")
+file = "accounting/items.csv"
+csv_file = data_manager.get_table_from_file("accounting/items.csv")
 names = {"id": 0, "month": 1, "day": 2, "year": 3, "type": 4, "amount": 5}
 
 def start_module():
@@ -42,17 +43,19 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
-            show_table(table)
+            show_table(csv_file)
         elif key == "2":
-            add(table)
+            add(csv_file)
         elif key == "3":
-            remove(table, id_)
+            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            remove(csv_file, remove_id[0])
         elif key == "4":
-            update(table, id_)
+            update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+            update(csv_file, update_id[0])
         elif key == "5":
-            which_year_max(table)
+            which_year_max(csv_file)
         elif key == "6":
-            avg_amount(table, year)
+            avg_amount(csv_file, year)
         elif key == "0":
             break
         else:
@@ -63,10 +66,10 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     titles = []
-
-    for title in names:
-        titles.append(title)
-
+    for count in range(len(names)):
+        for title in names:
+            if names[title] == count:
+                titles.append(title)
     ui.print_table(table, titles)
 
 
@@ -79,25 +82,21 @@ def add(table):
     for datas in table:
         ids.append(datas[names["id"]])
     new_id = common.generate_random(ids)
-    month = ui.get_inputs(["Please enter the month: "], "Month")
-    day = ui.get_inputs(["Please enter the day: "], "Day")
-    year = ui.get_inputs(["Please enter the year: "], "Year")
-    in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+    new_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Add new data")
     while True:
-        if in_or_out[0].lower() == "in":
-            in_or_out = "in"
+        if new_data[3][0].lower() == "in":
+            new_data[3] = "in"
             break
-        elif in_or_out[0].lower() == "out":
-            in_or_out = "out"
+        elif new_data[3][0].lower() == "out":
+            new_data[3] = "out"
             break
-        elif in_or_out[0].lower != "in" or "out":
-            in_or_out = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
-    amount = ui.get_inputs(["Please enter the amount: "], "Amount")
-
-    new_game = [new_id, month[0], day[0], year[0], in_or_out, amount[0]]
+        elif new_data[3][0].lower() != "in" or "out":
+            new_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+    new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3], new_data[4]]
 
     table.append(new_game)
 
+    data_manager.write_table_to_file(file, table)
     return table
 
 
@@ -115,6 +114,7 @@ def remove(table, id_):
             new_list.append(table[lines])
     csv_file = new_list
 
+    data_manager.write_table_to_file(file, csv_file)
     return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -123,11 +123,29 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
-
+    for line in range(len(table)):
+        if table[line][names["id"]] != id_:
+            new_list.append(table[line])
+        elif table[line][names["id"]] == id_:
+            update_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Update data")
+            while True:
+                if update_data[3][0].lower() == "in":
+                    update_data[3] = "in"
+                    break
+                elif update_data[3][0].lower() == "out":
+                    update_data[3] = "out"
+                    break
+                elif update_data[3][0].lower() != "in" or "out":
+                    update_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3], update_data[4]]
+            new_list.append(modified)
+    csv_file = new_list
+    data_manager.write_table_to_file(file, csv_file)
+    return csv_file
 
 # special functions:
 # ------------------
