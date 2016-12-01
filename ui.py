@@ -105,8 +105,8 @@ def get_inputs(list_labels, title):
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
-    for labels in range(len(list_labels)):
-        user_input = input(list_labels[labels])
+    for label in range(len(list_labels)):
+        user_input = input(list_labels[label])
         inputs.append(user_input)
     return inputs
 
