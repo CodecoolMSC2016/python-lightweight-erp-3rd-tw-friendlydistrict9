@@ -15,9 +15,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 
 # start this module by a module menu like the main menu
@@ -28,6 +30,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 file = "accounting/items.csv"
 csv_file = data_manager.get_table_from_file("accounting/items.csv")
 names = {"id": 0, "month": 1, "day": 2, "year": 3, "type": 4, "amount": 5}
+
 
 def start_module():
     while True:
@@ -50,7 +53,8 @@ def start_module():
             try:
                 check_id = False
                 while check_id != True:
-                    remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+                    remove_id = ui.get_inputs(
+                        ["Please enter the id what you want to remove: "], "Remove")
                     check_id = common.id_search(remove_id[0], csv_file, names)
             except ValueError as err:
                 ui.print_error_message(err)
@@ -59,7 +63,8 @@ def start_module():
             try:
                 check_id = False
                 while check_id != True:
-                    update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
+                    update_id = ui.get_inputs(
+                        ["Please enter the id what you want to update: "], "Update")
                     check_id = common.id_search(update_id[0], csv_file, names)
             except ValueError as err:
                 ui.print_error_message(err)
@@ -76,6 +81,8 @@ def start_module():
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table):
     titles = []
     for count in range(len(names)):
@@ -89,12 +96,13 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    
+
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
     new_id = common.generate_random(ids)
-    new_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Add new data")
+    new_data = ui.get_inputs(["Month: ", "Day: ", "Year: ",
+                              "Income or Outcome (in/out): ", "Amount: "], "Add new data")
     while True:
         if new_data[3][0].lower() == "in":
             new_data[3] = "in"
@@ -103,8 +111,10 @@ def add(table):
             new_data[3] = "out"
             break
         elif new_data[3][0].lower() != "in" or "out":
-            new_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
-    new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3], new_data[4]]
+            new_data[3] = ui.get_inputs(
+                ["Is it income (in) or outcome (out): "], "In or Out")
+    new_game = [new_id, new_data[0], new_data[1],
+                new_data[2], new_data[3], new_data[4]]
 
     table.append(new_game)
 
@@ -134,6 +144,8 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
+
 def update(table, id_):
     global csv_file
 
@@ -143,7 +155,8 @@ def update(table, id_):
         if table[line][names["id"]] != id_:
             new_list.append(table[line])
         elif table[line][names["id"]] == id_:
-            update_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Update data")
+            update_data = ui.get_inputs(
+                ["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Update data")
             while True:
                 if update_data[3][0].lower() == "in":
                     update_data[3] = "in"
@@ -152,8 +165,10 @@ def update(table, id_):
                     update_data[3] = "out"
                     break
                 elif update_data[3][0].lower() != "in" or "out":
-                    update_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
-            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3], update_data[4]]
+                    update_data[3] = ui.get_inputs(
+                        ["Is it income (in) or outcome (out): "], "In or Out")
+            modified = [id_, update_data[0], update_data[1],
+                        update_data[2], update_data[3], update_data[4]]
             new_list.append(modified)
     csv_file = new_list
     data_manager.write_table_to_file(file, csv_file)
@@ -164,11 +179,35 @@ def update(table, id_):
 
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
+
+
 def which_year_max(table):
+    year_dictionary = {}
+    max_profit = 0
+    max_year = 0
+    for line in table:
+        try:
+            if line[names["type"]] == "in":
+                year_dictionary[line[names["year"]]
+                                ] += int(line[names["amount"]])
+            else:
+                year_dictionary[line[names["year"]]
+                                ] -= int(line[names["amount"]])
+        except KeyError:
+            if line[names["type"]] == "in":
+                year_dictionary[line[names["year"]]] = int(
+                    line[names["amount"]])
+            else:
+                year_dictionary[line[names["year"]]] = - \
+                    int(line[names["amount"]])
 
-    # your code
+    for year, profit in year_dictionary.items():
+        if profit > max_profit:
+            max_profit = profit
+            max_year = year
 
-    pass
+    ui.print_result(str(max_year), "This year has the highest profit")
+    return int(max_year)
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
