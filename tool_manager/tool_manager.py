@@ -26,7 +26,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 file = "tool_manager/tools.csv"
 csv_file = data_manager.get_table_from_file("tool_manager/tools.csv")
-names = {"id": 0, "name": 1, "manufacturer": 2, "purchase_date": 3, "durability": 4}
+names = {"id": 0, "name": 1, "manufacturers": 2, "purchase_date": 3, "durability": 4}
 
 def start_module():
     while True:
@@ -136,18 +136,35 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
+    final_list = []
+    curr_year = 2016
 
-    # your code
-
-    pass
-
+    for line in range(len(table)):
+        if curr_year - int(table[line][names["purchase_date"]]) < int(table[line][names["durability"]]):
+            tool = [table[line][names["id"]], table[line][names["name"]], 
+                    table[line][names["manufacturers"]], int(table[line][names["purchase_date"]]), int(table[line][names["durability"]])]
+            final_list.append(tool)
+    
+    final = ui.print_result(final_list, "Items what are not exceeded their durability yet: ")
+    
+    return final_list
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
+    avg_durability = {}
+    for data in table:
+        total = 0
+        count = 0
+        if not data[names["manufacturers"]] in avg_durability:
+            for line in range(len(table)):
+                if data[names["manufacturers"]] == table[line][names["manufacturers"]]:
+                    total += int(table[line][names["durability"]])
+                    count += 1
+            avg_durability[data[names["manufacturers"]]] = float(total / count)
 
-    # your code
+    result = ui.print_result(avg_durability, "Average durability time: ")
 
-    pass
+    return avg_durability
