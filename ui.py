@@ -101,9 +101,9 @@ def get_inputs(list_labels, title):
     """
     inputs = []
 
-    get_ = input(list_labels[0])
-    for i in get_:
-        inputs.append(i)
+    user_input = input(list_labels[0])
+    #for i in user_input:
+    inputs.append(user_input)
 
     return inputs
 

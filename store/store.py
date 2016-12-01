@@ -24,7 +24,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("store/games.csv")
-names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in_stock": 4}
+names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in stock": 4}
 
 def start_module():
     while True:
@@ -61,7 +61,11 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-    titles = ["ID", "Title", "Publisher", "Price", "In Stock"]
+    titles = []
+
+    for title in names:
+        titles.append(title)
+
     ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -69,7 +73,19 @@ def show_table(table):
 # @table: list of lists
 def add(table):
 
-    # your code
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    
+    new_id = common.generate_random(ids)
+    title = ui.get_inputs(["Please enter the title of the game: "], "Title")
+    man = ui.get_inputs(["Please enter the manufacturer of the game: "], "Manufacturer")
+    price = ui.get_inputs(["Please enter the price of the game: "], "Price")
+    in_stock = ui.get_inputs(["Please enter how many of the game is in stock: "], "In Stock")
+
+    new_game = [new_id, title[0], man[0], price[0], in_stock[0]]
+
+    table.append(new_game)
 
     return table
 

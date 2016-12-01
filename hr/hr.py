@@ -59,21 +59,32 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
+    titles = []
 
-    # your code
+    for title in names:
+        titles.append(title)
 
-    pass
+    ui.print_table(table, titles)
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
 def add(table):
+    
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    
+    new_id = common.generate_random(ids)
+    name = ui.get_inputs(["Please enter the person's name: "], "Name")
+    date = ui.get_inputs(["Please enter the birth date (year): "], "Birth date")
 
-    # your code
+    new_game = [new_id, name[0], date[0]]
+
+    table.append(new_game)
 
     return table
-
 
 # Remove the record having the id @id_ from the @list, than return @table
 #

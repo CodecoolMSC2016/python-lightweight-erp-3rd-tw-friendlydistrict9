@@ -2,6 +2,8 @@
 
 import random
 import sys
+import random
+import string
 
 # generate and return a unique and random string
 # other expectation:
@@ -11,12 +13,20 @@ import sys
 # @table: list of list
 # @generated: string - generated random string (unique in the @table)
 def generate_random(table):
+    """Create a unique id from a list
+    """
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    numbers = string.digits
+    contain = [lower, upper, numbers, numbers, upper, lower]
 
-    generated = ''
-
-    # your code
-
-    return generated
+    while True:
+        generated = ''
+        for items in range(len(contain)):
+            generated += contain[items][random.randint(0, len(contain[items])-1)]
+        generated += "#&"
+        if not generated in table:
+            return generated
 
 def check_rows(table, title_list):
     """Checks if rows and header in a table has the same length

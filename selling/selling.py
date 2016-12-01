@@ -87,11 +87,23 @@ def show_table(table):
 
 
 def add(table):
+    
+    ids = []
+    for datas in table:
+        ids.append(datas[names["id"]])
+    
+    new_id = common.generate_random(ids)
+    title = ui.get_inputs(["Please enter the name of the game: "], "Name")
+    price = ui.get_inputs(["Please enter the price of the game "], "Price")
+    month = ui.get_inputs(["Please enter the month: "], "Month")
+    day = ui.get_inputs(["Please enter the day: "], "Day")
+    year = ui.get_inputs(["Please enter the year: "], "Year")
 
-    # your code
+    new_game = [new_id, title[0], price[0], month[0], day[0], year[0]]
+
+    table.append(new_game)
 
     return table
-
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
