@@ -95,21 +95,20 @@ def add(table):
         ids.append(datas[names["id"]])
     new_id = common.generate_random(ids)
     new_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Add new data")
-    while True:
-        if new_data[3][0].lower() == "in":
-            new_data[3] = "in"
-            break
-        elif new_data[3][0].lower() == "out":
-            new_data[3] = "out"
-            break
-        elif new_data[3][0].lower() != "in" or "out":
-            new_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
-    new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3], new_data[4]]
-
-    table.append(new_game)
-
-    data_manager.write_table_to_file(file, table)
-    return table
+    if new_data != None:
+        while True:
+            if new_data[3][0].lower() == "in":
+                new_data[3] = "in"
+                break
+            elif new_data[3][0].lower() == "out":
+                new_data[3] = "out"
+                break
+            elif new_data[3][0].lower() != "in" or "out":
+                new_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+        new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3], new_data[4]]
+        table.append(new_game)
+        data_manager.write_table_to_file(file, table)
+        return table
 
 
 # Remove the record having the id @id_ from the @list, than return @table
@@ -138,26 +137,26 @@ def update(table, id_):
     global csv_file
 
     new_list = []
-
-    for line in range(len(table)):
-        if table[line][names["id"]] != id_:
-            new_list.append(table[line])
-        elif table[line][names["id"]] == id_:
-            update_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Update data")
-            while True:
-                if update_data[3][0].lower() == "in":
-                    update_data[3] = "in"
-                    break
-                elif update_data[3][0].lower() == "out":
-                    update_data[3] = "out"
-                    break
-                elif update_data[3][0].lower() != "in" or "out":
-                    update_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
-            modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3], update_data[4]]
-            new_list.append(modified)
-    csv_file = new_list
-    data_manager.write_table_to_file(file, csv_file)
-    return csv_file
+    update_data = ui.get_inputs(["Month: ", "Day: ", "Year: ", "Income or Outcome (in/out): ", "Amount: "], "Update data")
+    if update_data != None:
+        for line in range(len(table)):
+            if table[line][names["id"]] != id_:
+                new_list.append(table[line])
+            elif table[line][names["id"]] == id_:
+                while True:
+                    if update_data[3][0].lower() == "in":
+                        update_data[3] = "in"
+                        break
+                    elif update_data[3][0].lower() == "out":
+                        update_data[3] = "out"
+                        break
+                    elif update_data[3][0].lower() != "in" or "out":
+                        update_data[3] = ui.get_inputs(["Is it income (in) or outcome (out): "], "In or Out")
+                modified = [id_, update_data[0], update_data[1], update_data[2], update_data[3], update_data[4]]
+                new_list.append(modified)
+        csv_file = new_list
+        data_manager.write_table_to_file(file, csv_file)
+        return csv_file
 
 # special functions:
 # ------------------

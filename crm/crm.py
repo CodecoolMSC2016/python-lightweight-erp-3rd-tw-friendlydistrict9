@@ -94,20 +94,21 @@ def add(table):
     
     new_id = common.generate_random(ids)
     new_data = ui.get_inputs(["Name: ", "email: ", "Subscribed (Y/N): "], "Add new data")
-    while True:
-        if new_data[2][0].lower() == "y":
-            new_data[2] = "1"
-            break
-        elif new_data[2][0].lower() == "n":
-            new_data[2] = "0"
-            break
-        elif new_data[2][0].lower() != "y" or "n":
-            new_data[2] = ui.get_inputs(["Is this person subscriped? (Y/N): "], "Subscriped")
-    new_game = [new_id, new_data[0], new_data[1], new_data[2]]
-
-    table.append(new_game)
-    data_manager.write_table_to_file(file, table)
-    return table
+    if new_data != None:
+        while True:
+            if new_data[2][0].lower() == "y":
+                new_data[2] = "1"
+                break
+            elif new_data[2][0].lower() == "n":
+                new_data[2] = "0"
+                break
+            elif new_data[2][0].lower() != "y" or "n":
+                new_data[2] = ui.get_inputs(["Is this person subscriped? (Y/N): "], "Subscriped")
+        if new_data[2] != None:
+            new_game = [new_id, new_data[0], new_data[1], new_data[2]]
+            table.append(new_game)
+            data_manager.write_table_to_file(file, table)
+            return table
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
@@ -135,26 +136,26 @@ def update(table, id_):
     global csv_file
 
     new_list = []
-
-    for line in range(len(table)):
-        if table[line][names["id"]] != id_:
-            new_list.append(table[line])
-        elif table[line][names["id"]] == id_:
-            update_data = ui.get_inputs(["Name: ", "email: ", "Subscribed (Y/N): "], "Update data")
-            while True:
-                if update_data[2][0].lower() == "y":
-                    update_data[2] = "1"
-                    break
-                elif update_data[2][0].lower() == "n":
-                    update_data[2] = "0"
-                    break
-                elif update_data[2][0].lower() != "y" or "n":
-                    update_data[2] = ui.get_inputs(["Is this person subscriped? (Y/N): "], "Subscriped")
-            modified = [id_, update_data[0], update_data[1], update_data[2]]
-            new_list.append(modified)
-    csv_file = new_list
-    data_manager.write_table_to_file(file, csv_file)
-    return csv_file
+    update_data = ui.get_inputs(["Name: ", "email: ", "Subscribed (Y/N): "], "Update data")
+    if update_data != None:
+        for line in range(len(table)):
+            if table[line][names["id"]] != id_:
+                new_list.append(table[line])
+            elif table[line][names["id"]] == id_:
+                while True:
+                    if update_data[2][0].lower() == "y":
+                        update_data[2] = "1"
+                        break
+                    elif update_data[2][0].lower() == "n":
+                        update_data[2] = "0"
+                        break
+                    elif update_data[2][0].lower() != "y" or "n":
+                        update_data[2] = ui.get_inputs(["Is this person subscriped? (Y/N): "], "Subscriped")
+                modified = [id_, update_data[0], update_data[1], update_data[2]]
+                new_list.append(modified)
+        csv_file = new_list
+        data_manager.write_table_to_file(file, csv_file)
+        return csv_file
 
 # special functions:
 # ------------------

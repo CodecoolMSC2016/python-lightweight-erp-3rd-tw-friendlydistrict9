@@ -1,5 +1,6 @@
 import common
 import time
+import string
 
 # This function needs to print outputs like this:
 # /-----------------------------------\
@@ -12,6 +13,8 @@ import time
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
+
+
 def print_table(table, title_list):
     tablestruct = [title_list]
     for row in table:
@@ -65,6 +68,7 @@ def print_menu(title, list_options, exit_message):
         print("(" + str(i) + ") " + list_options[i - 1])
     print("(0) " + exit_message)
 
+
 def navigate_sub_menus(name, options):
     """This will create the sub menu which is selected by
     the user in the main menu.
@@ -95,13 +99,23 @@ def get_inputs(list_labels, title):
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
-
-    for labels in range(len(list_labels)):
-        user_input = input(list_labels[labels])
+    try:
+        for label in range(len(list_labels)):
+            user_input = input(list_labels[label])
+            need_to_be_number = ["year", "month", "day", "number"]
+            check_char = False
+            while check_char != True:
+                    for need in range(len(need_to_be_number)):
+                        if need_to_be_number[need] in list_labels[label].lower():
+                            check_char = common.char_check(user_input, string.digits, list_labels[label])
+                        else:
+                            check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase, 
+                                                           list_labels[label])
         inputs.append(user_input)
-
+    except ValueError as err:
+        print_error_message(err)
+        return None
     return inputs
-
 
 # This function needs to print an error message. (example: Error: @message)
 #
