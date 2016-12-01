@@ -24,7 +24,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 #
 
 table = data_manager.get_table_from_file("store/games.csv")
-names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in_stock": 4}
+names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in stock": 4}
 
 def start_module():
     while True:
@@ -61,7 +61,11 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-    titles = ["ID", "Title", "Publisher", "Price", "In Stock"]
+    titles = []
+
+    for title in names:
+        titles.append(title)
+
     ui.print_table(table, titles)
 
 # Ask a new record as an input from the user than add it to @table, than return @table

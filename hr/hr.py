@@ -59,10 +59,12 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
+    titles = []
 
-    # your code
+    for title in names:
+        titles.append(title)
 
-    pass
+    ui.print_table(table, titles)
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
