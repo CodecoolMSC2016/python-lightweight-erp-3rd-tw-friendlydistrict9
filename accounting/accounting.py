@@ -52,18 +52,20 @@ def start_module():
                 while check_id != True:
                     remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
                     check_id = common.id_search(remove_id[0], csv_file, names)
+                    if remove_id != None:
+                        remove(csv_file, remove_id[0])
             except ValueError as err:
                 ui.print_error_message(err)
-            remove(csv_file, remove_id[0])
         elif key == "4":
             try:
                 check_id = False
                 while check_id != True:
                     update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
                     check_id = common.id_search(update_id[0], csv_file, names)
+                    if update_id != None:
+                        update(csv_file, update_id[0])
             except ValueError as err:
                 ui.print_error_message(err)
-            update(csv_file, update_id[0])
         elif key == "5":
             which_year_max(csv_file)
         elif key == "6":
