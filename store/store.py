@@ -55,6 +55,8 @@ def start_module():
         elif key == "5":
             get_counts_by_manufacturers(csv_file)
         elif key == "6":
+            manufacturer = ui.get_inputs(
+                ["Enter a manufacturer:"], "Input manufacturer")
             get_average_by_manufacturer(csv_file, manufacturer)
         elif key == "0":
             break
@@ -145,7 +147,14 @@ def get_counts_by_manufacturers(table):
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
-
-    # your code
-
-    pass
+    manufacturer_list = []
+    game_counter = 0
+    amount = 0
+    for line in table:
+        if line[names["manufacturer"]] == manufacturer[0]:
+            game_counter += 1
+            amount += int(line[names["in stock"]])
+    average = amount / game_counter
+    # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+    print(average)
+    return average
