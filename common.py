@@ -86,3 +86,33 @@ def id_search(check_id, table, dictionary):
         return True
     else:
         raise ValueError("There is no id like '" + check_id + "' :(")
+        return None
+
+
+def char_check(char, check, title):
+    for chars in range(len(char)):
+        if char[chars] in check:
+            return True
+    if "year" in title.lower():
+        if len(char) == 4:
+            return True
+    elif "month" in title.lower():
+        if int(char) <= 12:
+            return True
+    elif "day" in title.lower():
+        if int(char) <= 31:
+            return True
+    elif "number" in title.lower():
+        if char == int(char):
+            return True
+    elif "price" in title.lower():
+        if char == int(char):
+            return True
+    elif "stock" in title.lower():
+        if char == int(char):
+            return True
+    elif "amount" in title.lower():
+        if char == int(char):
+            return True
+    else:
+        raise ValueError("Please enter only the correct form :(")
