@@ -102,11 +102,16 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
+    for lines in range(len(table)):
+        if table[lines][names["id"]] != id_:
+            new_list.append(table[lines])
+    csv_file = new_list
 
+    return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table

@@ -77,10 +77,8 @@ def add(table):
         ids.append(datas[names["id"]])
     
     new_id = common.generate_random(ids)
-    name = ui.get_inputs(["Please enter the person's name: "], "Name")
-    date = ui.get_inputs(["Please enter the birth date (year): "], "Birth date")
-
-    new_game = [new_id, name[0], date[0]]
+    new_data = ui.get_inputs(["Name: ", "Birth date: "], "Add new data")
+    new_game = [new_id, new_data[0], new_data[1]]
 
     table.append(new_game)
 
@@ -91,11 +89,16 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
+    for lines in range(len(table)):
+        if table[lines][names["id"]] != id_:
+            new_list.append(table[lines])
+    csv_file = new_list
 
+    return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table

@@ -23,7 +23,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 
-table = data_manager.get_table_from_file("store/games.csv")
+csv_file = data_manager.get_table_from_file("store/games.csv")
 names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in stock": 4}
 
 def start_module():
@@ -40,17 +40,18 @@ def start_module():
         key = ui.navigate_sub_menus(module_name, options)
 
         if key == "1":
-            show_table(table)
+            show_table(csv_file)
         elif key == "2":
-            add(table)
+            add(csv_file)
         elif key == "3":
-            remove(table, id_)
+            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            remove(csv_file, remove_id[0])
         elif key == "4":
-            update(table, id_)
+            update(csv_file, id_)
         elif key == "5":
-            get_counts_by_manufacturers(table)
+            get_counts_by_manufacturers(csv_file)
         elif key == "6":
-            get_average_by_manufacturer(table, manufacturer)
+            get_average_by_manufacturer(csv_file, manufacturer)
         elif key == "0":
             break
         else:
@@ -78,28 +79,28 @@ def add(table):
         ids.append(datas[names["id"]])
     
     new_id = common.generate_random(ids)
-    title = ui.get_inputs(["Please enter the title of the game: "], "Title")
-    man = ui.get_inputs(["Please enter the manufacturer of the game: "], "Manufacturer")
-    price = ui.get_inputs(["Please enter the price of the game: "], "Price")
-    in_stock = ui.get_inputs(["Please enter how many of the game is in stock: "], "In Stock")
-
-    new_game = [new_id, title[0], man[0], price[0], in_stock[0]]
+    new_data = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "In stock: "], "Add new data")
+    new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3]]
 
     table.append(new_game)
 
     return table
-
 
 # Remove the record having the id @id_ from the @list, than return @table
 #
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
+    global csv_file
 
-    # your code
+    new_list = []
 
-    return table
+    for lines in range(len(table)):
+        if table[lines][names["id"]] != id_:
+            new_list.append(table[lines])
+    csv_file = new_list
 
+    return csv_file
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
