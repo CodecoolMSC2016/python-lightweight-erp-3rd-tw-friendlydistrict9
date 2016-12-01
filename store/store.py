@@ -14,9 +14,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 # start this module by a module menu like the main menu
 # user need to go back to the main menu from here
@@ -26,6 +28,7 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 file = "store/games.csv"
 csv_file = data_manager.get_table_from_file("store/games.csv")
 names = {"id": 0, "title": 1, "manufacturer": 2, "price": 3, "in stock": 4}
+
 
 def start_module():
     while True:
@@ -45,7 +48,8 @@ def start_module():
         elif key == "2":
             add(csv_file)
         elif key == "3":
-            remove_id = ui.get_inputs(["Please enter the id what you want to remove: "], "Remove")
+            remove_id = ui.get_inputs(
+                ["Please enter the id what you want to remove: "], "Remove")
             remove(csv_file, remove_id[0])
         elif key == "4":
             update_id = ui.get_inputs(["Please enter the id what you want to update: "], "Update")
@@ -74,14 +78,17 @@ def show_table(table):
 # Ask a new record as an input from the user than add it to @table, than return @table
 #
 # @table: list of lists
+
+
 def add(table):
 
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
-    
+
     new_id = common.generate_random(ids)
-    new_data = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "In stock: "], "Add new data")
+    new_data = ui.get_inputs(
+        ["Title: ", "Manufacturer: ", "Price: ", "In stock: "], "Add new data")
     new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3]]
 
     table.append(new_game)
@@ -93,6 +100,8 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
+
 def remove(table, id_):
     global csv_file
 
@@ -111,6 +120,8 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
+
 def update(table, id_):
     global csv_file
 
@@ -133,9 +144,15 @@ def update(table, id_):
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
-
-
-    pass
+    manufacturer_dictionary = {}
+    for line in table:
+        try:
+            manufacturer_dictionary[line[names["manufacturer"]]] += 1
+        except KeyError:
+            manufacturer_dictionary[line[names["manufacturer"]]] = 1
+    # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+    print(manufacturer_dictionary)
+    return manufacturer_dictionary
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?

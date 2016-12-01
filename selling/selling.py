@@ -59,7 +59,12 @@ def start_module():
         elif key == "5":
             get_lowest_price_item_id(csv_file)
         elif key == "6":
+<<<<<<< HEAD
             ui.get_inputs()
+=======
+            dates = ui.get_inputs(
+                ["month_from:", "day_from:", "year_from:", "month_to:", "day_to:", "year_to:"], "")
+>>>>>>> 4050ebaa87264aa5200b2fb287e02109127c2c3e
             month_from = dates[0]
             day_from = dates[1]
             year_from = dates[2]
@@ -91,14 +96,16 @@ def show_table(table):
 
 
 def add(table):
-    
+
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
-    
+
     new_id = common.generate_random(ids)
-    new_data = ui.get_inputs(["Title: ", "Price: ", "Month: ", "Day: ", "Year: "], "Add new data")
-    new_game = [new_id, new_data[0], new_data[1], new_data[2], new_data[3], new_data[4]]
+    new_data = ui.get_inputs(
+        ["Title: ", "Price: ", "Month: ", "Day: ", "Year: "], "Add new data")
+    new_game = [new_id, new_data[0], new_data[1],
+                new_data[2], new_data[3], new_data[4]]
 
     table.append(new_game)
 
@@ -109,6 +116,8 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
+
 def remove(table, id_):
     global csv_file
 
@@ -127,6 +136,8 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
+
 def update(table, id_):
     global csv_file
 
@@ -154,19 +165,23 @@ def get_lowest_price_item_id(table):
     table = sorted(table, key=lambda x: x[
         names["title"]], reverse=True)
     table = sorted(table, key=lambda x: int(
+<<<<<<< HEAD
         x[names["price"]]), reverse=False)
     # Test:
     # print(table)
     # print(table[0][names["ID"]])
     return table[0][names["id"]]
+=======
+        x[names["Price"]]), reverse=False)
+    # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+    print(table[0][names["ID"]])
+    return table[0][names["ID"]]
+>>>>>>> 4050ebaa87264aa5200b2fb287e02109127c2c3e
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
-    # Test:
-    print(table)
-
     filtered_list = []
     date_from = year_from + month_from.zfill(2) + day_from.zfill(2)
     date_to = year_to + month_to.zfill(2) + day_to.zfill(2)
@@ -174,6 +189,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     for i in range(len(table)):
         if int(date_from) < int(table[i][names["year"]] + table[i][names["month"]].zfill(2) + table[i][names["day"]].zfill(2)) < int(date_to):
             filtered_list.append(table[i])
-
-    print(filtered_list)
+    if len(filtered_list) > 0:
+        show_table(filtered_list)
+    else:
+        # common-ba kéne írni, egy függvényt a print helyetti kiiratásra
+        print("Item are not sold between the given dates.")
     return filtered_list
