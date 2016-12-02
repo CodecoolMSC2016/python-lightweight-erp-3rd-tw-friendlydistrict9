@@ -1,6 +1,5 @@
 import common
 import time
-import string
 
 # This function needs to print outputs like this:
 # /-----------------------------------\
@@ -13,13 +12,14 @@ import string
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
-
-
 def print_table(table, title_list):
     tablestruct = [title_list]
     for row in table:
         tablestruct.append(row)
+    #print(tablestruct)
     cols = common.get_col_lengths(tablestruct)
+    #print(cols)
+    #print("\n")
     for i in range(len(tablestruct)):
         for k in range(2):
             row_str = ""
@@ -43,6 +43,9 @@ def print_table(table, title_list):
 # @label: string - label of the result
 def print_result(result, label):
 
+    # your code
+
+    pass
     print("\033[92m", label, result, "\033[0m")
 
 
@@ -67,7 +70,6 @@ def print_menu(title, list_options, exit_message):
     for i in range(1, len(list_options) + 1):
         print("(" + str(i) + ") " + list_options[i - 1])
     print("(0) " + exit_message)
-
 
 def navigate_sub_menus(name, options):
     """This will create the sub menu which is selected by
@@ -99,23 +101,13 @@ def get_inputs(list_labels, title):
     Every character will be appended to a list. - David Szilagyi
     """
     inputs = []
-    try:
-        for label in range(len(list_labels)):
-            user_input = input(list_labels[label])
-            need_to_be_number = ["year", "month", "day", "number", "price", "stock", "amount"]
-            check_char = False
-            while check_char == False:
-                for need in range(len(need_to_be_number)):
-                    if need_to_be_number[need] in list_labels[label].lower():
-                        check_char = common.char_check(user_input, string.digits, list_labels[label])
-                    elif need == len(need_to_be_number)-1:
-                        check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase,
-                                                            list_labels[label])
+
+    for labels in range(len(list_labels)):
+        user_input = input(list_labels[labels])
         inputs.append(user_input)
-    except ValueError as err:
-        print_error_message(err)
-        return None
+
     return inputs
+
 
 # This function needs to print an error message. (example: Error: @message)
 #
