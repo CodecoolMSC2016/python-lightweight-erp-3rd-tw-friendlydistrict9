@@ -170,6 +170,7 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first of
 # descending alphabetical order
 def get_lowest_price_item_id(table):
+    
     #table = sorted(table, key=lambda x: x[
     #    names["title"]], reverse=True)
     #table = sorted(table, key=lambda x: int(

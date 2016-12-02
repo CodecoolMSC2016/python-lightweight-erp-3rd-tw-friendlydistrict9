@@ -89,11 +89,11 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    
+
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
-    
+
     new_id = common.generate_random(ids)
     new_data = ui.get_inputs(["Name: ", "email: ", "Subscribed (Y/N): "], "Add new data")
     if new_data != None:
@@ -166,16 +166,28 @@ def update(table, id_):
 # the question: What is the id of the customer with the longest name ?
 # return type: string (id) - if there are more than one longest name, return the first of descending alphabetical order
 def get_longest_name_id(table):
-
-    # your code
-
-    pass
+    longest_name = ""
+    for row in table:
+        cur_name = row[names["name"]]
+        if len(cur_name) > len(longest_name):
+            longest_name = cur_name
+    for row in table:
+        cur_id = row[names["id"]]
+        cur_name = row[names["name"]]
+        if cur_name == longest_name:
+            ui.print_result(cur_id, "Longest name: ")
+            return cur_id
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of string (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
-
-    # your code
-
-    pass
+    result = []
+    for row in table:
+        cur_name = row[names["name"]]
+        cur_subscribed = row[names["subscribed"]]
+        cur_email = row[names["email"]]
+        if row[names["subscribed"]] == "1":
+            result.append(str(cur_email) + ";" + str(cur_name))
+    ui.print_result(result, "Subscribed emails: ")
+    return result

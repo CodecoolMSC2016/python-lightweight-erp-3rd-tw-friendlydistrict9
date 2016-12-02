@@ -109,7 +109,7 @@ def get_inputs(list_labels, title):
                     if need_to_be_number[need] in list_labels[label].lower():
                         check_char = common.char_check(user_input, string.digits, list_labels[label])
                     elif need == len(need_to_be_number)-1:
-                        check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase, 
+                        check_char = common.char_check(user_input, string.ascii_lowercase + string.ascii_uppercase,
                                                             list_labels[label])
         inputs.append(user_input)
     except ValueError as err:
