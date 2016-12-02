@@ -26,6 +26,7 @@ file = "hr/persons.csv"
 csv_file = data_manager.get_table_from_file("hr/persons.csv")
 names = {"id": 0, "name": 1, "birth_date": 2}
 
+
 def start_module():
     while True:
         module_name = "Human resources manager"
@@ -75,6 +76,8 @@ def start_module():
 # print the default table of records from the file
 #
 # @table: list of lists
+
+
 def show_table(table):
     titles = []
     for count in range(len(names)):
@@ -88,11 +91,10 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    
     ids = []
     for datas in table:
         ids.append(datas[names["id"]])
-    
+
     new_id = common.generate_random(ids)
     new_data = ui.get_inputs(["Name: ", "Birth date: "], "Add new data")
     if new_data != None:
@@ -105,6 +107,8 @@ def add(table):
 #
 # @table: list of lists
 # @id_: string
+
+
 def remove(table, id_):
     global csv_file
 
@@ -123,6 +127,8 @@ def remove(table, id_):
 #
 # @table: list of lists
 # @id_: string
+
+
 def update(table, id_):
     global csv_file
 
@@ -144,17 +150,39 @@ def update(table, id_):
 
 # the question: Who is the oldest person ?
 # return type: list of strings (name or names if there are two more with the same value)
+
+
 def get_oldest_person(table):
-
-    # your code
-
-    pass
+    curr_year = 2016
+    oldest = 0
+    result = []
+    for data in table:
+        if curr_year - int(data[names["birth_date"]]) > oldest:
+            oldest = curr_year - int(data[names["birth_date"]])
+    for data in table:
+        if curr_year - int(data[names["birth_date"]]) == oldest:
+            result.append(data[names["name"]])
+    ui.print_result(result, "The oldest person(s): ")
+    return result
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
+
+
 def get_persons_closest_to_average(table):
-
-    # your code
-
-    pass
+    curr_year = 2016
+    total = 0
+    avg = 0
+    count = 0
+    result = []
+    for data in table:
+        count += 1
+        total += curr_year - int(data[names["birth_date"]])
+    avg = float(total / count)
+    for data in table:
+        check = avg - (curr_year - int(data[names["birth_date"]]))
+        if check > -1.5 and check < 0:
+            result.append(data[names["name"]])
+    ui.print_result(result, "Person(s) closest to average: ")
+    return result
