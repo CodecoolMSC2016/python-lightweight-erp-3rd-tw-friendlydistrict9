@@ -76,6 +76,7 @@ def start_module():
         elif key == "6":
             year = ui.get_inputs(
                 ["Enter a year:"], "Input year")
+            year = int(year[0])
             avg_amount(csv_file, year)
         elif key == "0":
             break
@@ -194,19 +195,14 @@ def which_year_max(table):
     for line in table:
         try:
             if line[names["type"]] == "in":
-                year_dictionary[line[names["year"]]
-                                ] += int(line[names["amount"]])
+                year_dictionary[line[names["year"]]] += int(line[names["amount"]])
             else:
-                year_dictionary[line[names["year"]]
-                                ] -= int(line[names["amount"]])
+                year_dictionary[line[names["year"]]] -= int(line[names["amount"]])
         except KeyError:
             if line[names["type"]] == "in":
-                year_dictionary[line[names["year"]]] = int(
-                    line[names["amount"]])
+                year_dictionary[line[names["year"]]] = int(line[names["amount"]])
             else:
-                year_dictionary[line[names["year"]]] = - \
-                    int(line[names["amount"]])
-
+                year_dictionary[line[names["year"]]] = -int(line[names["amount"]])
     for year, profit in year_dictionary.items():
         if profit > max_profit:
             max_profit = profit
@@ -221,12 +217,11 @@ def which_year_max(table):
 def avg_amount(table, year):
     profit = 0
     item_counter = 0
-    given_year = int(year[0])
     for line in table:
         line_type = line[names["type"]]
         line_amount = int(line[names["amount"]])
         line_year = int(line[names["year"]])
-        if line_year == given_year:
+        if line_year == year:
             if line_type == "out":
                 profit -= line_amount
             else:
